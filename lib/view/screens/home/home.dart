@@ -26,6 +26,7 @@ class HomeScreen extends StatelessWidget {
           await CourseCubit.get(context).getHomeCourse();
           },
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

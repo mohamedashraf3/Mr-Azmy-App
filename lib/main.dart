@@ -20,7 +20,6 @@ Future<void> main() async {
   await DioHelper.init();
   await LocalData.init();
   await FastCachedImageConfig.init();
-  bool isFirstTime = LocalData.get(SharedKeys.firstTime) ?? true;
   runApp(EasyLocalization(
     supportedLocales: [Locale('ar'), Locale('en')],
     path: 'assets/translations',
@@ -38,20 +37,16 @@ Future<void> main() async {
         )
       ],
       child: Phoenix(
-          child: MyApp(
-        isFirstTime: isFirstTime,
-      )),
+        child: MyApp(),
+      ),
     ),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final bool isFirstTime;
-
-  const MyApp({super.key, required this.isFirstTime});
-
   @override
   Widget build(BuildContext context) {
+    final isFirstTime = LocalData.get(SharedKeys.firstTime) ?? true;
     return BlocBuilder<DrawerCubit, DrawerState>(
       builder: (context, state) {
         return MaterialApp(

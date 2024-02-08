@@ -128,7 +128,7 @@ class DrawerWidget extends StatelessWidget {
                         onPressed: (int index) {
                               cubit.toggleLanguage(context)
                               .then((value) {
-                            Phoenix.rebirth(context);
+                                Phoenix.rebirth(context);
                             cubit.selectedItemIndex = 0;
                           });
                         },
