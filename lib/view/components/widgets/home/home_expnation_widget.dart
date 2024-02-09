@@ -35,7 +35,9 @@ class ExpansionTileCustom extends StatelessWidget {
       onExpansionChanged: onExpansionChanged,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       collapsedBackgroundColor: Theme.of(context).colorScheme.primary,
-      iconColor: isExpanded ? AppColors.darkPink : AppColors.darkGray,
+      iconColor: isExpanded
+          ? AppColors.darkPink
+          : Theme.of(context).colorScheme.onBackground,
       backgroundColor: isExpanded
           ? Theme.of(context).colorScheme.secondary
           : Theme.of(context).colorScheme.primary,
@@ -67,6 +69,7 @@ class ExpansionTileCustom extends StatelessWidget {
                       courseImage: homeCourses.courses?[index].image ?? "",
                       courseTitle: homeCourses.courses?[index].title ?? "",
                       onPressedView: () async {
+                        ConnectionAlert.internetConnection(context);
                         ConnectionAlert.checkConnectivity(context);
                         await cubit
                             .showCourseById(
@@ -81,6 +84,7 @@ class ExpansionTileCustom extends StatelessWidget {
                         });
                       },
                       onPressedEnroll: () {
+                        ConnectionAlert.internetConnection(context);
                         ConnectionAlert.checkConnectivity(context);
                         cubit.enrollNewCourse(
                             id: homeCourses.courses?[index].id ?? 0,

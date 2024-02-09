@@ -50,7 +50,6 @@ class DrawerCubit extends Cubit<DrawerState> {
 
   bool isSwitched = false;
   ThemeData? themeData = lightTheme;
-  bool isDarkTheme = LocalData.get(SharedKeys.isSwitched) ?? false;
 
   void toggleSwitch() {
     isSwitched = !isSwitched;

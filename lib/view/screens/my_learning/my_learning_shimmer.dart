@@ -11,7 +11,7 @@ class MyLearningShimmer extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: List.generate(
-          4,
+          6,
               (index) => Column(
             children: [
               ShimmerWidget(

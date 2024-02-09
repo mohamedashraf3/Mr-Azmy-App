@@ -17,6 +17,7 @@ class SplashScreen extends StatelessWidget {
       splash: Images.splashPhoto,
       nextScreen:Builder(
         builder: (context) {
+          ConnectionAlert.internetConnection(context);
           ConnectionAlert.checkConnectivity(context);
           if (LocalData.get(SharedKeys.isLogin) ?? false) {
             return HomeScreen();

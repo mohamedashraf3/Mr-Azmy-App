@@ -5,6 +5,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mr_azmi/view_model/data/local/shared_prefrence/shared_keys.dart';
 import 'package:mr_azmi/view_model/utils/translate_keys.g.dart';
+
 import '../../../view_model/bloc/auth_cubit/auth_cubit.dart';
 import '../../../view_model/bloc/drawer_cubit/drawer_cubit.dart';
 import '../../../view_model/data/local/shared_prefrence/shared_prefrence.dart';
@@ -71,6 +72,7 @@ class DrawerWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return ListTileCustom(
                         onTap: () {
+                          ConnectionAlert.internetConnection(context);
                           ConnectionAlert.checkConnectivity(context);
                           cubit.selectedItem(index);
                           Navigator.push(
@@ -126,9 +128,8 @@ class DrawerWidget extends StatelessWidget {
                           context.locale == Locale('ar'),
                         ],
                         onPressed: (int index) {
-                              cubit.toggleLanguage(context)
-                              .then((value) {
-                                Phoenix.rebirth(context);
+                          cubit.toggleLanguage(context).then((value) {
+                            Phoenix.rebirth(context);
                             cubit.selectedItemIndex = 0;
                           });
                         },
@@ -199,6 +200,7 @@ class DrawerWidget extends StatelessWidget {
                         color: AppColors.orange,
                         onPressed: state is! LogoutLoadingState
                             ? () {
+                                ConnectionAlert.internetConnection(context);
                                 ConnectionAlert.checkConnectivity(context);
                                 AuthCubit.get(context)
                                     .logoutWithApi(context: context)

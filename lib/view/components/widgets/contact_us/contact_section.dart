@@ -46,6 +46,7 @@ class ContactFormSection extends StatelessWidget {
                  color:AppColors.darkGray,
                  onPressed: (){
                    ConnectionAlert.checkConnectivity(context);
+                   ConnectionAlert.internetConnection(context);
                    NotificationHelper.showSuccessNotification(description: LocaleKeys.submitResponse.tr(), context: context);
                  }, child: TextCustom(text: LocaleKeys.submit.tr(),color: AppColors.white,)))
         ],

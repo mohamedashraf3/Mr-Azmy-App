@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mr_azmi/view/components/customs/custom_card.dart';
 import 'package:mr_azmi/view_model/utils/connection_alert.dart';
 import 'package:mr_azmi/view_model/utils/translate_keys.g.dart';
+
 import '../../../view_model/bloc/auth_cubit/auth_cubit.dart';
 import '../../../view_model/utils/app_colors.dart';
 import '../../../view_model/utils/imgs.dart';
@@ -39,7 +40,7 @@ class LoginWidget extends StatelessWidget {
                   ),
                   CustomCard(
                     child: Column(children: [
-                       Padding(
+                      Padding(
                         padding: EdgeInsets.all(8.0),
                         child: TextCustom(
                           text: LocaleKeys.login.tr(),
@@ -97,9 +98,14 @@ class LoginWidget extends StatelessWidget {
                               color: AppColors.darkPink,
                               onPressed: state is! LoginLoadingState
                                   ? () {
-                                ConnectionAlert.checkConnectivity(context);                                      if (cubit.loginFormKey.currentState!
+                                      ConnectionAlert.checkConnectivity(
+                                          context);
+                                      ConnectionAlert.internetConnection(context);
+                                      if (cubit.loginFormKey.currentState!
                                           .validate()) {
-                                        cubit.loginWithApi(context: context).then((value) {
+                                        cubit
+                                            .loginWithApi(context: context)
+                                            .then((value) {
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
@@ -116,12 +122,12 @@ class LoginWidget extends StatelessWidget {
                                   visible: state is! LoginLoadingState,
                                   replacement:
                                       const CircularProgressIndicator(),
-                                  child:  TextCustom(
+                                  child: TextCustom(
                                     text: LocaleKeys.login.tr(),
                                     color: AppColors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    height: 1.5 ,
+                                    height: 1.5,
                                   )),
                             ),
                           ),
@@ -134,7 +140,7 @@ class LoginWidget extends StatelessWidget {
                                 return const RegisterScreen();
                               }));
                             },
-                            child:Padding(
+                            child: Padding(
                               padding: EdgeInsets.all(8.0),
                               child: TextCustom(
                                 text: LocaleKeys.noAccount.tr(),

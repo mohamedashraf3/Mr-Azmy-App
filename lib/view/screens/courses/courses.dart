@@ -30,6 +30,7 @@ class CoursesScreen extends StatelessWidget {
                  const CoursesShimmer()
                 : RefreshIndicator(
                   onRefresh: ()async {
+                    ConnectionAlert.internetConnection(context);
                     ConnectionAlert.checkConnectivity(context);
                     cubit.allCoursesModel=null;
                    await cubit.getAllCourse();

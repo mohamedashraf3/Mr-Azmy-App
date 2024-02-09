@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mr_azmi/view/components/customs/social_icon.dart';
-import 'package:mr_azmi/view_model/utils/constant_img.dart';
+import 'package:mr_azmi/view_model/utils/constant_links.dart';
 import 'package:mr_azmi/view_model/utils/translate_keys.g.dart';
 import '../../../view_model/utils/app_colors.dart';
 import '../customs/text_custom.dart';

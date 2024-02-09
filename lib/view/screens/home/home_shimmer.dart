@@ -13,15 +13,14 @@ class HomeShimmer extends StatelessWidget {
       child: Column(
         children: List.generate(
           4,
-              (index) => Column(
+          (index) => Column(
             children: [
               ShimmerWidget(
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: AppColors.red,
-                    borderRadius: BorderRadius.all(Radius.circular(12))
-                  ),
+                      color: AppColors.red,
+                      borderRadius: BorderRadius.all(Radius.circular(12))),
                   height: 55,
                 ),
               ),

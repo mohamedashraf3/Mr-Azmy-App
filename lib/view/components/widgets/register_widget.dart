@@ -139,7 +139,10 @@ class RegisterWidget extends StatelessWidget {
                                 color: AppColors.darkPink,
                                 onPressed: state is! RegisterLoadingState
                                     ? () {
-                                          ConnectionAlert.checkConnectivity(context);
+                                        ConnectionAlert.internetConnection(
+                                            context);
+                                        ConnectionAlert.checkConnectivity(
+                                            context);
                                         if (cubit.registerFormKey.currentState!
                                             .validate()) {
                                           cubit

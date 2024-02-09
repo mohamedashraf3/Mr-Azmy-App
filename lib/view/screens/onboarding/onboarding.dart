@@ -19,6 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ConnectionAlert.internetConnection(context);
     ConnectionAlert.checkConnectivity(context);
     return IntroductionSlider(
       showStatusBar: true,
@@ -88,6 +89,7 @@ class OnBoardingScreen extends StatelessWidget {
       done: Done(
         child: IconButton(
             onPressed: () {
+              ConnectionAlert.internetConnection(context);
               ConnectionAlert.checkConnectivity(context);
               LocalData.set(key: SharedKeys.firstTime, value: false);
               Navigator.pushReplacement(context,

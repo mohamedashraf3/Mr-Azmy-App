@@ -46,7 +46,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final isFirstTime = LocalData.get(SharedKeys.firstTime) ?? true;
+    final bool isFirstTime = LocalData.get(SharedKeys.firstTime) ?? true;
     return BlocBuilder<DrawerCubit, DrawerState>(
       builder: (context, state) {
         return MaterialApp(
@@ -55,9 +55,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
-          theme: LocalData.get(SharedKeys.isSwitched) == true
-              ? darkTheme
-              : lightTheme,
+          theme: LocalData.get(SharedKeys.isSwitched) == true ? darkTheme : lightTheme,
           home: isFirstTime ? OnBoardingScreen() : SplashScreen(),
         );
       },

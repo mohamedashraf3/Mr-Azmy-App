@@ -55,11 +55,13 @@ class CoursesDetailsWidget extends StatelessWidget {
                       courseImage: data.courses?[index].image ?? "",
                       courseTitle: data.courses?[index].title ?? "",
                       onPressedEnroll: () {
+                        ConnectionAlert.internetConnection(context);
                         ConnectionAlert.checkConnectivity(context);
                         cubit.enrollNewCourse(
                             id: data.courses?[index].id ?? 0, context: context);
                       },
                       onPressedView: () async {
+                        ConnectionAlert.internetConnection(context);
                         ConnectionAlert.checkConnectivity(context);
                         await cubit.showCourseById(id: data.courses?[index].id ?? 0)
                             .then((value) {

@@ -24,7 +24,6 @@ class CourseCubit extends Cubit<CourseState> {
   String? selectedVideoUrl;
   String? selectedVideoName;
   HomeCourseModel? homeCourseModel;
-  String? selectedLessonTitle;
 
   Future<void> getHomeCourse() async {
     emit(GetHomeCourseLoadingState());
@@ -147,11 +146,11 @@ class CourseCubit extends Cubit<CourseState> {
     if (videoPlayerController != null) {
       videoPlayerController!.dispose();
     }
-
     videoPlayerController =
         VideoPlayerController.networkUrl(Uri.parse(selectedVideoUrl ?? ""));
     emit(IntiVideoControllerState());
   }
+
   void disposeVideoController() {
     videoPlayerController?.dispose();
     emit(DisposeVideoControllerState());

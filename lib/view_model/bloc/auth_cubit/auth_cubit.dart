@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mr_azmi/view_model/data/network/dio_helper.dart';
 import 'package:mr_azmi/view_model/data/network/end_points.dart';
-
 import '../../data/local/shared_prefrence/shared_keys.dart';
 import '../../data/local/shared_prefrence/shared_prefrence.dart';
 import '../../utils/toasts_notification.dart';
@@ -23,8 +21,6 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController confirmPassController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String? loginError;
-
-  List<Map<String, dynamic>>? enrolledCourses;
 
   Future<void> loginWithApi({required BuildContext context}) async {
     emit(LoginLoadingState());
@@ -123,20 +119,25 @@ class AuthCubit extends Cubit<AuthState> {
     phoneError = null;
   }
 
-  void handleEnrolledCourses(Response value) async {
-    enrolledCourses = (value.data['data']['enrolled_courses'] as List<dynamic>)
-        .cast<Map<String, dynamic>>();
+  List<Map<String, dynamic>>? enrolledCourses;
 
+  void handleEnrolledCourses(Response value) async {
+    enrolledCourses = (value.data['data']['enrolled_courses'] as List<dynamic>).cast<Map<String, dynamic>>();
     String enrolledCoursesJson = jsonEncode(enrolledCourses);
     LocalData.set(key: SharedKeys.enrolledCourses, value: enrolledCoursesJson);
   }
 
+  List<Map<String, dynamic>>? getEnrolledCoursesFromStorage() {
+    String? enrolledCourseJson = LocalData.get(SharedKeys.enrolledCourses);
+    if (enrolledCourseJson != null) {
+      return (jsonDecode(enrolledCourseJson) as List<dynamic>).cast<Map<String, dynamic>>();
+    }
+    return null;
+  }
+
   bool isCourseEnrolled(int? courseId) {
-    List<Map<String, dynamic>>? enrolledCourses =
-        getEnrolledCoursesFromStorage();
-
+    List<Map<String, dynamic>>? enrolledCourses = getEnrolledCoursesFromStorage();
     if (enrolledCourses == null) return false;
-
     for (var enrolledCourse in enrolledCourses) {
       if (enrolledCourse['course_id'] == courseId) {
         return true;
@@ -145,12 +146,4 @@ class AuthCubit extends Cubit<AuthState> {
     return false;
   }
 
-  List<Map<String, dynamic>>? getEnrolledCoursesFromStorage() {
-    String? enrolledCourseJson = LocalData.get(SharedKeys.enrolledCourses);
-    if (enrolledCourseJson != null) {
-      return (jsonDecode(enrolledCourseJson) as List<dynamic>)
-          .cast<Map<String, dynamic>>();
-    }
-    return null;
-  }
 }

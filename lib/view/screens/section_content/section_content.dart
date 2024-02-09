@@ -120,6 +120,7 @@ class SectionContentScreen extends StatelessWidget {
                                                               : null,
                                                         ),
                                                         onTap: () {
+                                                          ConnectionAlert.internetConnection(context);
                                                           ConnectionAlert
                                                               .checkConnectivity(
                                                                   context);

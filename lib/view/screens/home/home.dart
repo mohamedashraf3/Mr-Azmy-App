@@ -7,6 +7,7 @@ import 'package:mr_azmi/view/components/widgets/home/courses_widget.dart';
 import 'package:mr_azmi/view/components/widgets/home/home_header.dart';
 import 'package:mr_azmi/view_model/bloc/course_cubit/course_cubit.dart';
 import 'package:mr_azmi/view_model/utils/translate_keys.g.dart';
+
 import '../../../view_model/utils/connection_alert.dart';
 import '../../components/customs/custom_appbar.dart';
 
@@ -15,16 +16,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBarCustom(),
       drawer: DrawerWidget(),
       body: RefreshIndicator(
-        onRefresh: ()async{
+        onRefresh: () async {
+          ConnectionAlert.internetConnection(context);
           ConnectionAlert.checkConnectivity(context);
-          CourseCubit.get(context).homeCourseModel=null;
+          CourseCubit.get(context).homeCourseModel = null;
           await CourseCubit.get(context).getHomeCourse();
-          },
+        },
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
